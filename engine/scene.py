@@ -1,13 +1,21 @@
 from __future__ import annotations
 from enum import Enum
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from engine.window import Window
 
 TransitionReason = Enum("TransitionReason", ["INITIAL_SCENE"])
 
 class Scene:
     """Defines a separate part of the game.
-    Note that __init__ should be called before anything, and transition should be called """
-    def __init__(self):
-        pass
+    Note that __init__ should be called before anything, and transition should be called before setting the scene as the one rendered.
+    Initialization should be done in transition to ensure the scene can be reused."""
+    def __init__(self, window: Window):
+        self.window = window
+        self.window_surface = window.window
 
     def transition(self, origin: Scene|TransitionReason, **kwargs):
+        pass
+
+    def update(self):
         pass
